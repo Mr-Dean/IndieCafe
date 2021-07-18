@@ -1,8 +1,20 @@
 <% layout('layouts/boilerplate') -%>
-    <h1><%= cafe.name %> </h1>
-    <img src="<%= cafe.img %>" alt="cafe photo">
-    <h2><%= cafe.address %> </h2>
-    <a href="/cafes">Back</a>
-    <a href="/cafes/<%=cafe._id%>/edit">Edit</a>
-    <form action="/cafes/<%=cafe._id%>?_method=DELETE" method="POST">
-        <button>Delete</button>
+<div class="col-6 offset-3">
+     <div class="card">
+        <img src="<%= cafe.image%>" class="card-img-top" alt="cafe photo">
+        <div class="card-body">
+            <h5 class="card-title"><%=cafe.name %></h5>
+            <p class="card-text"><%=cafe.address %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+             <li class="list-group-item"><%= cafe.description%></li>
+        </ul>
+        <div class="card-body">
+            <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>
+            <form class="d-inline" action="/cafes/<%=cafe._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger card-link">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+        
