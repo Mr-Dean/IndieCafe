@@ -3,22 +3,34 @@
         <div class="row">
             <h1 class="text-center">Edit Cafe</h1>
         <div class="col-6 offset-3">
-            <form class="d-inline" action="/cafes/<%=cafe._id%>?_method=PUT" method="POST">
+            <form class="d-inline needs-validation" action="/cafes/<%=cafe._id%>?_method=PUT" method="POST" novalidate>
                 <div class="mb-3"> 
                     <label class="form-label" for="name">Name</label>
-                    <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.name%>">
+                    <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.title%>" required>
+                    <div class="invalid-feedback">
+                        Please enter title.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="address">Address</label>
-                    <input class="form-control" type="text" id="address" name="cafe[address]" value="<%=cafe.address%>">
+                    <input class="form-control" type="text" id="address" name="cafe[address]" value="<%=cafe.address%>" required>
+                    <div class="invalid-feedback">
+                        Please enter address.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">Image</label>
-                    <input class="form-control" type="text" id="image" name="cafe[image]" value="<%=cafe.image%>">
+                    <input class="form-control" type="text" id="image" name="cafe[image]" value="<%=cafe.image%>" required>
+                    <div class="invalid-feedback">
+                            Please choose an image.
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="decription">Description</label>
-                    <textarea rows="3" class="form-control" type="text" id="description" name="cafe[description]"><%=cafe.description%></textarea>
+                    <label class="form-label" for="description">Description</label>
+                    <textarea rows="3" class="form-control" type="text" id="description" name="cafe[description]" required><%=cafe.description%></textarea>
+                    <div class="invalid-feedback">
+                        Please add a description.
+                    </div>
                 </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
