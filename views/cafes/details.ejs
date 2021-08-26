@@ -1,20 +1,51 @@
 <% layout('layouts/boilerplate') -%>
-<div class="col-6 offset-3">
-     <div class="card">
-        <img src="<%= cafe.image%>" class="card-img-top" alt="cafe photo">
-        <div class="card-body">
-            <h5 class="card-title"><%=cafe.name %></h5>
-            <p class="card-text"><%=cafe.address %></p>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <img src="<%= cafe.image%>" class="card-img-top" alt="cafe photo">
+            <div class="card-body">
+                <h5 class="card-title"><%=cafe.name %></h5>
+                <p class="card-text"><%=cafe.address %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><%= cafe.description%></li>
+            </ul>
+            <div class="card-body">
+                <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>
+                <form class="d-inline" action="/cafes/<%=cafe._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger card-link">Delete</button>
+                </form>
+            </div>
         </div>
-        <ul class="list-group list-group-flush">
-             <li class="list-group-item"><%= cafe.description%></li>
-        </ul>
-        <div class="card-body">
-            <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>
-            <form class="d-inline" action="/cafes/<%=cafe._id%>?_method=DELETE" method="POST">
-                <button class="btn btn-danger card-link">Delete</button>
-            </form>
-        </div>
+    </div>
+    <div class="col-6">
+        <h2 class="text-center">Leave a review</h2>
+        <form action="/cafes/<%=cafe._id%>/reviews" method="POST" class="mb-3 needs-validation">
+            <div class="mb-3">
+                <label class="form-label" for="rating">Rating</label>
+                <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="body">Review</label>
+                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form>
+        <% for (let review of cafe.reviews) { %>
+            <%console.log(review.body)%>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Rating: <%=review.rating %></h5>
+                    <p class="card-text">Review: <%=review.body %></p>
+                    <form action="/cafes/<%=cafe._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% } %>
     </div>
 </div>
         

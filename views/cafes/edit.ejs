@@ -6,7 +6,7 @@
             <form class="d-inline needs-validation" action="/cafes/<%=cafe._id%>?_method=PUT" method="POST" novalidate>
                 <div class="mb-3"> 
                     <label class="form-label" for="name">Name</label>
-                    <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.title%>" required>
+                    <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.name%>" required>
                     <div class="invalid-feedback">
                         Please enter title.
                     </div>
@@ -38,3 +38,4 @@
             </div>
             </div>
         </div>
+        
