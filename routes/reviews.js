@@ -22,6 +22,7 @@ router.post('/', validateReview, asyncCatch(async(req, res) => {
     cafe.reviews.push(review);
     await review.save();
     await cafe.save()
+    req.flash('success', 'Created new review!');
     res.redirect(`/cafes/${cafe._id}`);
 }))
 
@@ -29,6 +30,7 @@ router.delete('/:reviewId', asyncCatch(async(req, res) => {
     const { id, reviewId } = req.params;
     await Cafe.findByIdAndUpdate(id, { $pull: { reviews: reviewId }});
     await Review.findByIdAndDelete(reviewId);
+    req.flash('success', 'Successfully deleted review!');
     res.redirect(`/cafes/${id}`)
 }))
 

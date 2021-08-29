@@ -45,12 +45,14 @@ router.get('/:id/edit', asyncCatch(async (req, res) => {
 router.put('/:id', validateCafe, asyncCatch(async (req, res) => {
     const { id } = req.params;
     const cafe = await Cafe.findByIdAndUpdate(id, {...req.body.cafe})
+    req.flash('success', 'Successfully updated!');
     res.redirect(`/cafes/${cafe.id}`)
 }));
 
 router.delete('/:id', asyncCatch(async (req, res) => {
     const { id } = req.params;
     await Cafe.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted cafe!');
     res.redirect('/cafes');
 }))
 
