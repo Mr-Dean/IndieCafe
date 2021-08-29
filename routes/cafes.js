@@ -28,6 +28,7 @@ router.get('/new', (req, res) => {
 router.post('/', validateCafe, asyncCatch(async (req, res) => {
     const cafe = new Cafe(req.body.cafe)
     await cafe.save();
+    req.flash('success', 'Successfully added a new cafe!');
     res.redirect(`/cafes/${cafe._id}`);
 }));
 
