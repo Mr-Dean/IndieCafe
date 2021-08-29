@@ -18,35 +18,43 @@ const validateCafe = (req, res, next) => {
 
 router.get('/', asyncCatch(async(req, res) => {
     const cafes = await Cafe.find({});
-    res.render('cafes/index', {cafes})
+    res.render('cafes/index', {cafes});
 }));
 
 router.get('/new', (req, res) => {
-    res.render('cafes/new')
+    res.render('cafes/new');
 });
 
 router.post('/', validateCafe, asyncCatch(async (req, res) => {
-    const cafe = new Cafe(req.body.cafe)
+    const cafe = new Cafe(req.body.cafe);
     await cafe.save();
     req.flash('success', 'Successfully added a new cafe!');
     res.redirect(`/cafes/${cafe._id}`);
 }));
 
 router.get('/:id', asyncCatch(async (req, res) => {
-    const cafe = await Cafe.findById(req.params.id).populate('reviews')
-    res.render('cafes/details', { cafe })
+    const cafe = await Cafe.findById(req.params.id).populate('reviews');
+    if(!cafe) {
+        req.flash('error', 'Cafe not found!');
+        return res.redirect('/cafes');
+    }
+    res.render('cafes/details', { cafe });
 }));
 
 router.get('/:id/edit', asyncCatch(async (req, res) => {
-   const cafe = await Cafe.findById(req.params.id)
-   res.render('cafes/edit', { cafe })
+   const cafe = await Cafe.findById(req.params.id);
+   if(!cafe) {
+    req.flash('error', 'Cafe not found!');
+    return res.redirect('/cafes');
+}
+   res.render('cafes/edit', { cafe });
 }));
 
 router.put('/:id', validateCafe, asyncCatch(async (req, res) => {
     const { id } = req.params;
-    const cafe = await Cafe.findByIdAndUpdate(id, {...req.body.cafe})
+    const cafe = await Cafe.findByIdAndUpdate(id, {...req.body.cafe});
     req.flash('success', 'Successfully updated!');
-    res.redirect(`/cafes/${cafe.id}`)
+    res.redirect(`/cafes/${cafe.id}`);
 }));
 
 router.delete('/:id', asyncCatch(async (req, res) => {
