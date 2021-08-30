@@ -1,11 +1,12 @@
 const express = require('express');
-const User = require('../models/user');
 const router = express.Router();
+const passport = require('passport');
+const User = require('../models/user');
 const asyncCatch = require('../utils/asyncCatch');
 
 router.get('/register', (req, res) => {
     res.render('users/register');
-})
+});
 
 router.post('/register', asyncCatch(async(req, res) => {
     try {
@@ -18,5 +19,14 @@ router.post('/register', asyncCatch(async(req, res) => {
         req.flash('error', e.message);
         res.redirect('/register');
     }
-}))
+}));
+
+router.get('/login', (req, res) => {
+    res.render('users/login');
+});
+
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+    req.flash('success', 'Welcome Back!');
+    res.redirect('/cafes');
+})
 module.exports = router;
