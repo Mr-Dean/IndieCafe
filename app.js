@@ -11,9 +11,9 @@ const passport = require('passport');
 const PassportLocal = require('passport-local');
 const User = require('./models/user');
 
-
-const cafes = require('./routes/cafes');
-const reviews = require('./routes/reviews');
+const userRoutes = require('./routes/users');
+const cafeRoutes = require('./routes/cafes');
+const reviewRoutes = require('./routes/reviews');
 
 mongoose.set('useFindAndModify', false);
 
@@ -69,8 +69,9 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.use('/cafes', cafes)
-app.use('/cafes/:id/reviews', reviews)
+app.use('/', userRoutes);
+app.use('/cafes', cafeRoutes);
+app.use('/cafes/:id/reviews', reviewRoutes);
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
