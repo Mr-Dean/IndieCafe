@@ -4,6 +4,7 @@ const ExpressError = require('../utils/ExpressError');
 const asyncCatch = require('../utils/asyncCatch');
 const { cafeSchema } = require('../schemas');
 const Cafe = require('../models/cafe');
+const { isLoggedIn } = require('../middleware');
 
 const validateCafe = (req, res, next) => {
     const { error } = cafeSchema.validate(req.body);
@@ -21,11 +22,11 @@ router.get('/', asyncCatch(async(req, res) => {
     res.render('cafes/index', {cafes});
 }));
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('cafes/new');
 });
 
-router.post('/', validateCafe, asyncCatch(async (req, res) => {
+router.post('/', isLoggedIn, validateCafe, asyncCatch(async (req, res) => {
     const cafe = new Cafe(req.body.cafe);
     await cafe.save();
     req.flash('success', 'Successfully added a new cafe!');
