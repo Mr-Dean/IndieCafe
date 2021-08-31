@@ -1,6 +1,7 @@
-const { cafeSchema } = require('./schemas');
+const { cafeSchema, reviewSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError');
-const Cafe = require('../models/cafe');
+const Cafe = require('./models/cafe');
+
 
 module.exports.isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()) {
@@ -11,15 +12,6 @@ module.exports.isLoggedIn = (req, res, next) => {
     next()
 }
 
-module.exports.validateCafe = (req, res, next) => {
-    const { error } = cafeSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-};
 
 module.exports.isAuthor = async(req, res, next) => {
     const { id } = req.params;
@@ -29,3 +21,23 @@ module.exports.isAuthor = async(req, res, next) => {
         return res.redirect(`/cafes/${id}`);
     }
 }
+
+module.exports.validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
+
+module.exports.validateCafe = (req, res, next) => {
+    const { error } = cafeSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
