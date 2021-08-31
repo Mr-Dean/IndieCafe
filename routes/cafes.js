@@ -14,7 +14,7 @@ router.get('/new', isLoggedIn, (req, res) => {
     res.render('cafes/new');
 });
 
-router.post('/', isLoggedIn, isAuthor, validateCafe, asyncCatch(async (req, res) => {
+router.post('/', isLoggedIn, validateCafe, asyncCatch(async (req, res) => {
     const cafe = new Cafe(req.body.cafe);
     cafe.author = req.user._id; //authorization
     await cafe.save();
@@ -23,7 +23,12 @@ router.post('/', isLoggedIn, isAuthor, validateCafe, asyncCatch(async (req, res)
 }));
 
 router.get('/:id', asyncCatch(async (req, res) => {
-    const cafe = await Cafe.findById(req.params.id).populate('reviews').populate('author'); //populates reviews and authors
+    const cafe = await Cafe.findById(req.params.id).populate({
+        path: 'reviews', 
+        populate: {
+            path: 'author'
+        }
+    }).populate('author'); //populates reviews and authors
     if(!cafe) {
         req.flash('error', 'Cafe not found!');
         return res.redirect('/cafes');

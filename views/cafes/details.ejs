@@ -2,19 +2,19 @@
 <div class="row">
     <div class="col-6">
         <div class="card">
-            <img src="<%= cafe.image%>" class="card-img-top" alt="cafe photo">
+            <img src="<%= cafe.image %>" class="card-img-top" alt="cafe photo">
             <div class="card-body">
-                <h5 class="card-title"><%=cafe.name %></h5>
-                <p class="card-text"><%=cafe.address %></p>
+                <h5 class="card-title"><%= cafe.name %></h5>
+                <p class="card-text"><%= cafe.address %></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><%= cafe.description%></li>
-                <li class="list-group-item">Submitted by <%= cafe.author.username%></li>
+                <li class="list-group-item"><%= cafe.description %></li>
+                <li class="list-group-item">Submitted by <%= cafe.author.username %></li>
             </ul>
-            <% if(currentUser && campground.author.equals(currentUser._id)) {%> <!--only show edit and delete if currentUser exist and is also the author-->
+            <% if(currentUser && cafe.author.equals(currentUser._id)) {%> <!--only show edit and delete if currentUser exist and is also the author-->
             <div class="card-body">
                 <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>
-                <form class="d-inline" action="/cafes/<%=cafe._id%>?_method=DELETE" method="POST">
+                <form class="d-inline" action="/cafes/<%= cafe._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-danger card-link">Delete</button>
                 </form>
             </div>
@@ -22,8 +22,9 @@
         </div>
     </div>
     <div class="col-6">
+        <% if(currentUser) { %> 
         <h2 class="text-center">Leave a review</h2>
-        <form action="/cafes/<%=cafe._id%>/reviews" method="POST" class="mb-3 needs-validation">
+        <form action="/cafes/<%= cafe._id %>/reviews" method="POST" class="mb-3 needs-validation">
             <div class="mb-3">
                 <label class="form-label" for="rating">Rating</label>
                 <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
@@ -37,14 +38,18 @@
             </div>
             <button class="btn btn-success">Submit</button>
         </form>
+        <% } %> 
         <% for (let review of cafe.reviews) { %>
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Rating: <%=review.rating %></h5>
-                    <p class="card-text">Review: <%=review.body %></p>
-                    <form action="/cafes/<%=cafe._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                    <h5 class="card-title">Rating: <%= review.rating %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %></h6>
+                    <p class="card-text">Review: <%= review.body %></p>
+                    <% if(currentUser && review.author.equals(currentUser._id)) { %> 
+                    <form action="/cafes/<%= cafe._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>
+                    <% } %> 
                 </div>
             </div>
             <% } %>
