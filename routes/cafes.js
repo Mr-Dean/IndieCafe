@@ -16,6 +16,15 @@ const validateCafe = (req, res, next) => {
     }
 };
 
+const isAuthor = async(req, res, next) => {
+    const { id } = req.params;
+    const cafe = await Cafe.findById(id);
+    if(!cafe.author.equals(req.user._id)) {
+        req.flash('error', 'You do not have permission to do that');
+        return res.redirect(`/cafes/${id}`);
+    }
+}
+
 
 router.get('/', asyncCatch(async(req, res) => {
     const cafes = await Cafe.find({});
