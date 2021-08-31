@@ -7,6 +7,10 @@ const CafeSchema = new Schema({
     description: String,
     address: String,
     image: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

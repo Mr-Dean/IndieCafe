@@ -28,13 +28,14 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.post('/', isLoggedIn, validateCafe, asyncCatch(async (req, res) => {
     const cafe = new Cafe(req.body.cafe);
+    cafe.author = req.user._id; //authentication
     await cafe.save();
     req.flash('success', 'Successfully added a new cafe!');
     res.redirect(`/cafes/${cafe._id}`);
 }));
 
 router.get('/:id', asyncCatch(async (req, res) => {
-    const cafe = await Cafe.findById(req.params.id).populate('reviews');
+    const cafe = await Cafe.findById(req.params.id).populate('reviews').populate('author'); //populates reviews and authors
     if(!cafe) {
         req.flash('error', 'Cafe not found!');
         return res.redirect('/cafes');
