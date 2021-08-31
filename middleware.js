@@ -1,6 +1,7 @@
 const { cafeSchema, reviewSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError');
 const Cafe = require('./models/cafe');
+const Review = require('./models/review');
 
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -17,6 +18,15 @@ module.exports.isAuthor = async(req, res, next) => {
     const { id } = req.params;
     const cafe = await Cafe.findById(id);
     if(!cafe.author.equals(req.user._id)) {
+        req.flash('error', 'You do not have permission to do that');
+        return res.redirect(`/cafes/${id}`);
+    }
+}
+
+module.exports.isReviewAuthor = async(req, res, next) => {
+    const { id, reviewId } = req.params;
+    const review = await Review.findById(id);
+    if(!review.author.equals(reviewId)) {
         req.flash('error', 'You do not have permission to do that');
         return res.redirect(`/cafes/${id}`);
     }
