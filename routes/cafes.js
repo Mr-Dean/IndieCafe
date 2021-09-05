@@ -15,7 +15,7 @@ router.get('/new', isLoggedIn, cafes.renderNewForm);
 router.route('/:id')
     .get(asyncCatch(cafes.showCafe))
     .put(validateCafe, isLoggedIn, isAuthor, asyncCatch(cafes.updateCafe))
-    .delete('/:id', isLoggedIn, isAuthor, asyncCatch(cafes.deleteCafe));
+    .delete(isLoggedIn, isAuthor, asyncCatch(cafes.deleteCafe));
 
 
 router.get('/:id/edit', isLoggedIn, isAuthor, asyncCatch(cafes.renderEditCafe));
