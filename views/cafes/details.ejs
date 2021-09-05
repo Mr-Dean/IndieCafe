@@ -6,10 +6,10 @@
             <div class="card-body">
                 <h5 class="card-title"><%= cafe.name %></h5>
                 <p class="card-text"><%= cafe.address %></p>
+                <p class="list-group-item">Submitted by <%= cafe.author.username %></p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><%= cafe.description %></li>
-                <li class="list-group-item">Submitted by <%= cafe.author.username %></li>
             </ul>
             <% if(currentUser && cafe.author.equals(currentUser._id)) { %><!--only show edit and delete if currentUser exist and is also the author-->
             <div class="card-body">

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const asyncCatch = require('../utils/asyncCatch');
 const cafes = require('../controllers/cafes');
-const reviews = require('../controllers/reviews');
 const { isLoggedIn, isAuthor, validateCafe } = require('../middleware');
 
 

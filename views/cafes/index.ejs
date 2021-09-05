@@ -3,14 +3,20 @@
     <ul>
         <% for (let cafe of cafes) { %>
             <div class="card mb-3">
-                <img src="<%= cafe.image %>" class="card-img-top" alt="cafe photo">
-                <div class="card-body">
-                  <h5 class="card-title"><%= cafe.name %></h5>
-                  <p class="card-text"><%= cafe.description %></p>
-                  <p class="card-text"><small class="text-muted"><%= cafe.address %></small></p>
-                  <a href="/cafes/<%= cafe._id%>" class="btn btn-primary">View</a>
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="<%= cafe.image %>" class="card-img-top" alt="cafe photo">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= cafe.name %></h5>
+                    <p class="card-text"><%= cafe.description %></p>
+                    <p class="card-text"><small class="text-muted"><%= cafe.address %></small></p>
+                    <a href="/cafes/<%= cafe._id%>" class="btn btn-primary">View</a>
+                  </div>
                 </div>
               </div>
+            </div>
         <% } %> 
     </ul>
     <a href="/cafes/new">Add Cafe</a>
