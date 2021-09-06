@@ -6,7 +6,12 @@ const CafeSchema = new Schema({
     name: String,
     description: String,
     address: String,
-    image: String,
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

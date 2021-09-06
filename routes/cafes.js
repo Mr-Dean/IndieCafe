@@ -10,11 +10,7 @@ const upload = multer({ storage });
 
 router.route('/')
     .get(asyncCatch(cafes.index))
-    .post(upload.array('image'), (req,res) => {
-        console.log(req.body, req.files);
-        res.send('IT WORKED')
-    })
-    //.post(isLoggedIn, validateCafe, asyncCatch(cafes.createCafe));
+    .post(isLoggedIn, upload.array('image'), validateCafe, asyncCatch(cafes.createCafe));
 
 router.get('/new', isLoggedIn, cafes.renderNewForm);
 

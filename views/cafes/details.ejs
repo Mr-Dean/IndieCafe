@@ -3,7 +3,9 @@
 <div class="row">
     <div class="col-6">
         <div class="card">
-            <img src="<%= cafe.image %>" class="card-img-top" alt="cafe photo">
+            <% for(let img of cafe.images) { %> 
+            <img src="<%= img.url %>" class="card-img-top" alt="cafe photo">
+            <% } %> 
             <div class="card-body">
                 <h5 class="card-title"><%= cafe.name %></h5>
                 <p class="card-text"><%= cafe.address %></p>
