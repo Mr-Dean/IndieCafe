@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -10,7 +14,6 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const PassportLocal = require('passport-local');
 const User = require('./models/user');
-
 const userRoutes = require('./routes/users');
 const cafeRoutes = require('./routes/cafes');
 const reviewRoutes = require('./routes/reviews');

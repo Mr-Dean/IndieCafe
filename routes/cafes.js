@@ -3,11 +3,18 @@ const router = express.Router();
 const asyncCatch = require('../utils/asyncCatch');
 const cafes = require('../controllers/cafes');
 const { isLoggedIn, isAuthor, validateCafe } = require('../middleware');
+const multer  = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 
 router.route('/')
     .get(asyncCatch(cafes.index))
-    .post(isLoggedIn, validateCafe, asyncCatch(cafes.createCafe));
+    .post(upload.array('image'), (req,res) => {
+        console.log(req.body, req.files);
+        res.send('IT WORKED')
+    })
+    //.post(isLoggedIn, validateCafe, asyncCatch(cafes.createCafe));
 
 router.get('/new', isLoggedIn, cafes.renderNewForm);
 
