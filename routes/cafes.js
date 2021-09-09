@@ -16,7 +16,7 @@ router.get('/new', isLoggedIn, cafes.renderNewForm);
 
 router.route('/:id')
     .get(asyncCatch(cafes.showCafe))
-    .put(validateCafe, isLoggedIn, isAuthor, asyncCatch(cafes.updateCafe))
+    .put(isLoggedIn, isAuthor, upload.array('image'), validateCafe, asyncCatch(cafes.updateCafe))
     .delete(isLoggedIn, isAuthor, asyncCatch(cafes.deleteCafe));
 
 

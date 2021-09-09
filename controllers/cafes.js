@@ -45,6 +45,9 @@ module.exports.renderEditCafe = async (req, res) => {
  module.exports.updateCafe = async (req, res) => {
     const { id } = req.params;
     const cafe = await Cafe.findByIdAndUpdate(id, {...req.body.cafe});
+    const images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    cafe.images.push(...images);
+    await cafe.save()
     req.flash('success', 'Successfully updated!');
     res.redirect(`/cafes/${cafe.id}`);
 };
