@@ -34,7 +34,7 @@
                 </div>
                 <div class="mb-3">
                     <% cafe.images.forEach(function(img, i) { %>
-                        <img class="img-thumbnail" src="<%= img.url %>" alt="image">
+                        <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="image">
                         <div class="form-check-inline">
                             <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
                         </div>
