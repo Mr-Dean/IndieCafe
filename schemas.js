@@ -6,7 +6,8 @@ module.exports.cafeSchema = Joi.object({
         //image: Joi.string().required(),
         address: Joi.string().required(),
         description: Joi.string().required()
-    }).required()
+    }).required(),
+    deleteImages: Joi.array()
 });
 
 module.exports.reviewSchema = Joi.object({
