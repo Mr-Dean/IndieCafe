@@ -18,8 +18,8 @@ module.exports.createCafe = async (req, res) => {
         query: req.body.cafe.address,
         limit: 1
     }).send()
-    res.send(geoData.body.features[0].geometry.coordinates);
     const cafe = new Cafe(req.body.cafe);
+    cafe.geometry = geoData.body.features[0].geometry;
     cafe.images = req.files.map(f => ({ url: f.path, filename: f.filename })); //storing cloudinary links into mongo.
     cafe.author = req.user._id; //authorization
     await cafe.save();
