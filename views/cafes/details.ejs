@@ -92,7 +92,8 @@
 </div>
 
 <script>
-    const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const cafe = <%- JSON.stringify(cafe) %>;
 </script>
 
 <script src="/js/showPageMap.js"></script>

@@ -23,7 +23,6 @@ module.exports.createCafe = async (req, res) => {
     cafe.images = req.files.map(f => ({ url: f.path, filename: f.filename })); //storing cloudinary links into mongo.
     cafe.author = req.user._id; //authorization
     await cafe.save();
-    console.log(cafe);
     req.flash('success', 'Successfully added a new cafe!');
     res.redirect(`/cafes/${cafe._id}`);
 };
