@@ -6,6 +6,11 @@ const map = new mapboxgl.Map({
     zoom: 15 // starting zoom
 });
 
+const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+    `<h3>${cafe.name}</h3>`
+    );
+
 const marker1 = new mapboxgl.Marker()
 .setLngLat(cafe.geometry.coordinates)
+.setPopup(popup)
 .addTo(map);
