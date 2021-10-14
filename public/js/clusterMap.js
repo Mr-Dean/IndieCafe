@@ -32,22 +32,22 @@ paint: {
 //   * Yellow, 30px circles when point count is between 100 and 750
 //   * Pink, 40px circles when point count is greater than or equal to 750
 'circle-color': [
-'step',
-['get', 'point_count'],
-'#51bbd6',
-100,
-'#f1f075',
-750,
-'#f28cb1'
+    'step',
+    ['get', 'point_count'],
+    '#BA112D',
+    100,
+    '#BA112D',
+    750,
+    '#BA112D'
 ],
 'circle-radius': [
-'step',
-['get', 'point_count'],
-20,
-100,
-30,
-750,
-40
+    'step',
+    ['get', 'point_count'],
+    20,
+    100,
+    30,
+    750,
+    40
 ]
 }
 });
@@ -70,7 +70,7 @@ type: 'circle',
 source: 'cafes',
 filter: ['!', ['has', 'point_count']],
 paint: {
-'circle-color': '#11b4da',
+'circle-color': '#BA112D',
 'circle-radius': 10,
 'circle-stroke-width': 2,
 'circle-stroke-color': '#fff'
