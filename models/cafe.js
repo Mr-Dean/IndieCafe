@@ -11,6 +11,9 @@ ImageSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_200');
 });
 
+
+const opts = { toJSON: { virtuals: true } };
+
 const CafeSchema = new Schema({
     name: String,
     description: String,
@@ -37,7 +40,8 @@ const CafeSchema = new Schema({
             ref: 'Review'
         }
     ]
-})
+}, opts)
+
 
 CafeSchema.post('findOneAndDelete', async function(doc) {
     if(doc) {
@@ -48,6 +52,11 @@ CafeSchema.post('findOneAndDelete', async function(doc) {
         })
     }
 })
+
+CafeSchema.virtual('properties.popUpMarkup').get(function () {
+    return `<strong><a href="/cafes/${this._id}">${this.name}</a></strong>
+    <p>${this.description.substring(0,40)}...</p>`
+});
 
 
 module.exports = mongoose.model('Cafe', CafeSchema);
