@@ -14,3 +14,5 @@ const marker1 = new mapboxgl.Marker()
 .setLngLat(cafe.geometry.coordinates)
 .setPopup(popup)
 .addTo(map);
+
+map.addControl(new mapboxgl.NavigationControl());
