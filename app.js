@@ -18,6 +18,8 @@ const userRoutes = require('./routes/users');
 const cafeRoutes = require('./routes/cafes');
 const reviewRoutes = require('./routes/reviews');
 
+const mongoSanitize = require('express-mongo-sanitize');
+
 mongoose.set('useFindAndModify', false);
 
 mongoose.connect('mongodb://localhost:27017/indie-cafe', {
@@ -36,6 +38,7 @@ db.once("open", () => {
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize());
 
 const sessionConfig = {
     secret: 'secret',
