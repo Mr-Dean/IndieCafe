@@ -2,15 +2,18 @@
 <link rel="stylesheet" href="/stylesheets/stars.css">
 <div class="row">
     <div class="col-6">
-
-    
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="card">
+        <div id="carouselExampleControls" class="carousel slide card-img-top" data-bs-ride="carousel">
             <div class="carousel-inner">
-            <% cafe.images.forEach((img, i) => { %> 
-              <div class="carousel-item <%= i === 0 ? 'active' : '' %>"> <!--make the first image the active image-->
-                <img src="<%= img.url  %> " class="d-block w-100" alt="...">
-              </div>
-            <% }) %> 
+                <% if(cafe.images.length) { %>
+                <% cafe.images.forEach((img, i) => { %> 
+                <div class="carousel-item <%= i === 0 ? 'active' : '' %>"> <!--make the first image the active image-->
+                    <img src="<%= img.url  %> " class="d-block w-100" alt="...">
+                </div>
+                <% }) %> 
+                <% } else { %> 
+                    <img src="https://res.cloudinary.com/dspwhfrx6/image/upload/v1634148332/IndieCafe/171026-better-coffee-boost-se-329p_zwofyt.jpg" class="card-img-top" alt="cafe photo">
+                <% } %>
               
             </div>
             <% if(cafe.images.length > 1) { %> <!--show buttons only if there is more than one image-->
@@ -24,15 +27,17 @@
             </button>
             <% } %> 
           </div>
-        <div class="card">
+          <h5 class="card-header p-3 bg-dark text-white fs-2 text-uppercase"><%= cafe.name %></h5>
             <div class="card-body">
-                <h5 class="card-title"><%= cafe.name %></h5>
-                <p class="card-text"><%= cafe.address %></p>
-                <p class="list-group-item">Submitted by <%= cafe.author.username %></p>
+                <p class="card-title border-bottom p-2"><%= cafe.address %></p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><%= cafe.description %></li>
+                </ul>      
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><%= cafe.description %></li>
-            </ul>
+            <div class="card-footer text-muted">
+                Submitted by <%= cafe.author.username %>
+              </div>
+            
             <% if(currentUser && cafe.author.equals(currentUser._id)) { %><!--only show edit and delete if currentUser exist and is also the author-->
             <div class="card-body">
                 <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>

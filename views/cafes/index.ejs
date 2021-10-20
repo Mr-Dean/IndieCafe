@@ -1,20 +1,20 @@
 <% layout('layouts/boilerplate') -%>
     <div id="cluster-map"></div>
-    <h1>All Cafes</h1>
+    <h1 class="text-center m-3">Explore cafes</h1>
     <ul>
         <% for (let cafe of cafes) { %>
-            <div class="card mb-3">
-              <div class="row">
+            <div class="card mb-3 border-light" style="max-width: 100%" >
+              <div class="row g-0">
                 <div class="col-md-4">
-                  <% if(cafe.images.length) { %> 
-                  <img src="<%= cafe.images[0].url %>" class="card-img-top" alt="cafe photo">
+                  <% if(cafe.images.length) { %>
+                  <img src="<%= cafe.images[0].url %>" class="img-fluid rounded-start" alt="...">
                   <% } else { %> 
                   <img src="https://res.cloudinary.com/dspwhfrx6/image/upload/v1634148332/IndieCafe/171026-better-coffee-boost-se-329p_zwofyt.jpg" class="card-img-top" alt="cafe photo">
-                  <% } %> 
+                  <% } %>
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title"><%= cafe.name %></h5>
+                    <h5 class="card-title fs-2"><%= cafe.name %></h5>
                     <p class="card-text"><%= cafe.description %></p>
                     <p class="card-text"><small class="text-muted"><%= cafe.address %></small></p>
                     <a href="/cafes/<%= cafe._id%>" class="btn btn-primary">View</a>
@@ -24,6 +24,7 @@
             </div>
         <% } %> 
     </ul>
+
     <script>
       const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
       const cafes = {features: <%- JSON.stringify(cafes) %>}; //put cafes in a features object as mapbox clusterMap.js is looking for a 'features' object
