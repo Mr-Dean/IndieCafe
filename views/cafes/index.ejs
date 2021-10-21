@@ -1,29 +1,9 @@
 <% layout('layouts/boilerplate') -%>
-    <div id="cluster-map"></div>
-    <h1 class="text-center m-3">Explore cafes</h1>
-    <ul>
-        <% for (let cafe of cafes) { %>
-            <div class="card mb-3 border-light" style="max-width: 100%" >
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <% if(cafe.images.length) { %>
-                  <img src="<%= cafe.images[0].url %>" class="img-fluid rounded-start" alt="...">
-                  <% } else { %> 
-                  <img src="https://res.cloudinary.com/dspwhfrx6/image/upload/v1634148332/IndieCafe/171026-better-coffee-boost-se-329p_zwofyt.jpg" class="card-img-top" alt="cafe photo">
-                  <% } %>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title fs-2"><%= cafe.name %></h5>
-                    <p class="card-text"><%= cafe.description %></p>
-                    <p class="card-text"><small class="text-muted"><%= cafe.address %></small></p>
-                    <a href="/cafes/<%= cafe._id%>" class="btn btn-primary">View</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <% } %> 
-    </ul>
+<h1 class="text-center fs-1 mt-2 fw-bold mb-2">Explore the best independant cafes...</h1>
+<p class="text-center fs-6 mt-2">Use the map to find fantastic coffee shops at a location of your choosing. <br> Whether you are going away for the weekend looking for the best grinds or staying local, you are sure to find that perfect place to take a break and enjoy the best brews around!</p>
+<p class="text-center fs-7"><strong>Found a great spot not listed here?</strong><br>Add it.</p>
+<p class="text-center fs-7"><strong>Have something to say about a particular cafe? </strong><br> Leave a review and share your experience with others!</p>
+    <div class="mb-5" id="cluster-map"></div>
 
     <script>
       const mapToken = '<%-process.env.MAPBOX_TOKEN%>';

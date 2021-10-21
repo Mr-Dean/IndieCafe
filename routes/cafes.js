@@ -12,6 +12,8 @@ router.route('/')
     .get(asyncCatch(cafes.index))
     .post(isLoggedIn, upload.array('image'), validateCafe, asyncCatch(cafes.createCafe));
 
+router.get('/all', asyncCatch(cafes.all))
+    
 router.get('/new', isLoggedIn, cafes.renderNewForm);
 
 router.route('/:id')

@@ -9,6 +9,11 @@ module.exports.index = async(req, res) => {
     res.render('cafes/index', {cafes});
 };
 
+module.exports.all = async(req, res) => {
+    const cafes = await Cafe.find({});
+    res.render('cafes/all', {cafes});
+};
+
 module.exports.renderNewForm = (req, res) => {
     res.render('cafes/new');
 };

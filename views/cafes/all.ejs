@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') -%>
+<h1 class="text-center fs-1 mt-2 fw-bold mb-2">All Cafes</h1>
+    <ul>
+        <% for (let cafe of cafes) { %>
+            <div class="card w-100 mb-2 border-light mt-5">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <% if(cafe.images.length) { %>
+                  <img src="<%= cafe.images[0].url %>" class="img-fluid rounded-start" alt="...">
+                  <% } else { %> 
+                  <img src="https://res.cloudinary.com/dspwhfrx6/image/upload/v1634148332/IndieCafe/171026-better-coffee-boost-se-329p_zwofyt.jpg" class="card-img-top" alt="cafe photo">
+                  <% } %>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title fs-2"><%= cafe.name %></h5>
+                    <p class="card-text"><%= cafe.description %></p>
+                    <p class="card-text"><small class="text-muted"><%= cafe.address %></small></p>
+                    <a href="/cafes/<%= cafe._id%>" class="btn btn-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% } %> 
+    </ul>

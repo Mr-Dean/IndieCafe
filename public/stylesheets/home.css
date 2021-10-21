@@ -1,7 +1,7 @@
 body {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
-    url("https://res.cloudinary.com/dspwhfrx6/image/upload/v1634478305/IndieCafe/fantasycoffee_axvlsp.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("https://res.cloudinary.com/dspwhfrx6/image/upload/v1634835466/IndieCafe/the-creative-exchange-d1ngW7SNehM-unsplash_vvaujp.jpg");
   background-size: cover;
   background-position: center;
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
