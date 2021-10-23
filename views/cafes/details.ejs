@@ -26,14 +26,14 @@
             </button>
             <% } %> 
           </div>
-          <h5 class="card-header p-3 bg-dark text-white fs-2 text-uppercase"><%= cafe.name %></h5>
+          <h5 class="card-header p-3 bg-dark text-white fs-2 text-uppercase text-center"><%= cafe.name %></h5>
             <div class="card-body">
-                <p class="card-title border-bottom p-2"><%= cafe.address %></p>
+                <p class="card-title border-bottom p-2 text-center fs-5"><%= cafe.address %></p>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><%= cafe.description %></li>
                 </ul>      
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted text-center">
                 Submitted by <%= cafe.author.username %>
               </div>
             <% if(currentUser && cafe.author.equals(currentUser._id)) { %><!--only show edit and delete if currentUser exist and is also the author-->
@@ -49,9 +49,8 @@
     <div class="col-6">
         <div id='map'></div>
         <% if(currentUser) { %> 
-        <h2 class="text-center mb-3">Leave a review</h2>
+        <h2 class="text-center mt-3 mb-3">Leave a review</h2>
         <form class="mb-5" action="/cafes/<%= cafe._id %>/reviews" method="POST" class="mb-3 needs-validation">
-            
             <fieldset class="starability-basic">
                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                 <input type="radio" id="first-rate1" name="review[rating]" value="1" />
