@@ -5,9 +5,9 @@
 <p class="text-center fs-7"><strong>Have something to say about a particular cafe? </strong><br> Leave a review and share your experience with others!</p>
     <div class="mb-5" id="cluster-map"></div>
 
-    <script>
-      const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-      const cafes = {features: <%- JSON.stringify(cafes) %>}; //put cafes in a features object as mapbox clusterMap.js is looking for a 'features' object
-    </script>
-    <script src="/js/clusterMap.js"></script>
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const cafes = {features: <%- JSON.stringify(cafes) %>}; //put cafes in a features object as mapbox clusterMap.js is looking for a 'features' object
+</script>
+<script src="/js/clusterMap.js"></script>
   

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/stars.css">
 <div class="row">
     <div class="col-6">
-        <div class="card">
+        <div class="card mb-5">
         <div id="carouselExampleControls" class="carousel slide card-img-top" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <% if(cafe.images.length) { %>
@@ -14,7 +14,6 @@
                 <% } else { %> 
                     <img src="https://res.cloudinary.com/dspwhfrx6/image/upload/v1634148332/IndieCafe/171026-better-coffee-boost-se-329p_zwofyt.jpg" class="card-img-top" alt="cafe photo">
                 <% } %>
-              
             </div>
             <% if(cafe.images.length > 1) { %> <!--show buttons only if there is more than one image-->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -37,7 +36,6 @@
             <div class="card-footer text-muted">
                 Submitted by <%= cafe.author.username %>
               </div>
-            
             <% if(currentUser && cafe.author.equals(currentUser._id)) { %><!--only show edit and delete if currentUser exist and is also the author-->
             <div class="card-body">
                 <a href="/cafes/<%= cafe._id %>/edit" class="btn btn-warning card-link">Edit</a>
@@ -66,8 +64,7 @@
                 <label for="first-rate4" title="Very good">4 stars</label>
                 <input type="radio" id="first-rate5" name="review[rating]" value="5" />
                 <label for="first-rate5" title="Amazing">5 stars</label>
-              </fieldset>
-            
+              </fieldset> 
             <div class="mb-3">
                 <label class="form-label" for="body">Review</label>
                 <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"></textarea>
