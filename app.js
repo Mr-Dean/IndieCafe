@@ -90,7 +90,7 @@ app.use(
                 "data:",
                 "https://res.cloudinary.com/dspwhfrx6/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
             ],
-            fontSrc: ["'self'", ...fontSrcUrls],
+            fontSrc: ["'self'"],
         },
     })
 );
