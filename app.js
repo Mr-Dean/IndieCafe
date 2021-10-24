@@ -20,10 +20,17 @@ const reviewRoutes = require('./routes/reviews');
 
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/indie-cafe';
+
+const MongoStore = require('connect-mongo');
 
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect('mongodb://localhost:27017/indie-cafe', {
+
+
+
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -66,7 +73,7 @@ const connectSrcUrls = [
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
 ];
-const fontSrcUrls = [];
+
 
 app.use(
     helmet.contentSecurityPolicy({
@@ -90,9 +97,19 @@ app.use(
 
 // content secruity policy info ^^ //
 
+const secret = process.env.SECRET || 'secret';
+
+const store = {
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+};
+
+
 const sessionConfig = {
+    store: MongoStore.create(store),
     name: 'sesh',
-    secret: 'secret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -142,6 +159,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 });
 
-app.listen(3002, () => {
-    console.log('Listening on port 3002!')
+const port = process.env.PORT || 3000; //heroku port or localhost
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
 });
