@@ -36,6 +36,7 @@ mongoose.connect(dbUrl, {
     useCreateIndex: true,
 });
 
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -78,7 +79,9 @@ const connectSrcUrls = [
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: [],
+            workerSrc: ["blob:"],
+            childSrc: ["blob:"],
+            defaultSrc: ["self"],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
