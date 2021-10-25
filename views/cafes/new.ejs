@@ -1,9 +1,8 @@
 <% layout('layouts/boilerplate') -%>
-<div class="row">
-    <div class="row">
+<div class="d-flex flex-column justify-content-center w-75 m-auto">
         <h1 class="text-center">New Cafe</h1>
-    <div class="col-md-6 offset-md-3">
-        <form action="/cafes" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+       
+        <form class=""action="/cafes" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="mb-3"> 
                 <label class="form-label" for="name">Name</label>
                 <input class="form-control" type="text" id="name" name="cafe[name]" required>
@@ -30,6 +29,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Add Cafe</button>
         </form>
-    </div>
-    </div>
+  
+    
+    
 </div>
