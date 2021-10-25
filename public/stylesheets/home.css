@@ -11,18 +11,11 @@ body {
   max-width: 60vw;
 }
 
-.nav-link {
-  padding: 0.25rem 0;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
-  margin-left: 1rem;
+.nav-custom {
+  color: rgb(219, 219, 219);
 }
 
-.nav-link:hover {
-  color: white;
-}
-
-.nav-link.active {
+.nav-custom:hover {
   color: white;
 }
 
