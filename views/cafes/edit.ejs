@@ -1,50 +1,52 @@
 <% layout('layouts/boilerplate') -%>
-    <div class="row">
-        <div class="row">
-            <h1 class="text-center">Edit Cafe</h1>
-        <div class="col-6 offset-3">
-            <form class="d-inline needs-validation" action="/cafes/<%=cafe._id%>?_method=PUT" method="POST" novalidate enctype="multipart/form-data">
-                <div class="mb-3"> 
-                    <label class="form-label" for="name">Name</label>
-                    <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.name%>" required>
-                    <div class="invalid-feedback">
-                        Please enter title.
+    <div class="d-flex flex-column justify-content-center w-75 m-auto">
+        <h1 class="text-center">Edit Cafe</h1>
+        <form class="d-inline needs-validation" action="/cafes/<%=cafe._id%>?_method=PUT" method="POST" novalidate enctype="multipart/form-data">
+            <div class="mb-3"> 
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" type="text" id="name" name="cafe[name]" value="<%=cafe.name%>" required>
+                <div class="invalid-feedback">
+                    Please enter title.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="address">Address</label>
+                <input class="form-control" type="text" id="address" name="cafe[address]" value="<%=cafe.address%>" required>
+                <div class="invalid-feedback">
+                    Please enter address.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image(s)</label>
+                <input class="form-control" type="file" id="image" multiple>
+                <div class="invalid-feedback">
+                    Please choose an image.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea rows="3" class="form-control" type="text" id="description" name="cafe[description]" required><%=cafe.description%></textarea>
+                <div class="invalid-feedback">
+                    Please add a description.
+                </div>
+            </div>
+            <div class="mb-3">
+                <% cafe.images.forEach(function(img, i) { %>
+                    <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="image">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="address">Address</label>
-                    <input class="form-control" type="text" id="address" name="cafe[address]" value="<%=cafe.address%>" required>
-                    <div class="invalid-feedback">
-                        Please enter address.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image(s)</label>
-                    <input class="form-control" type="file" id="image" multiple>
-                    <div class="invalid-feedback">
-                        Please choose an image.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description</label>
-                    <textarea rows="3" class="form-control" type="text" id="description" name="cafe[description]" required><%=cafe.description%></textarea>
-                    <div class="invalid-feedback">
-                        Please add a description.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <% cafe.images.forEach(function(img, i) { %>
-                        <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="image">
-                        <div class="form-check-inline">
-                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
-                        </div>
-                        <label for="image-<%=i%>">Delete</label>
-                    <% }) %>
-                </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+                    <label for="image-<%=i%>">Delete</label>
+                <% }) %>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
+                <button type="submit" class="btn btn-primary text-center">Save Changes</button>
                 <a class="btn btn-secondary" href="/cafes/<%= cafe._id %>">Back</a>
             </div>
-            </div>
-        </div>
+           
+                
+        </form>
+        
+    </div>
+            
         
